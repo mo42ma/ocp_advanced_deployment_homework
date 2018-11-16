@@ -12,8 +12,3 @@ The person grading the assignment will
 * exmaine the deployed OpenShift to ensure that all aspects of the homework were 
 deployed properly.
 
-
-Good luck!  And try to have fun!
-
-
-

@@ -14,6 +14,8 @@
 - name: Verify NFS Shared Volumes on Hosts
   hosts: nfs
   tasks:
+    - name: Examine the NFS server to see which NFS volumes are shared
+      shell: exportfs
 
 - name: Install packages and config auth
   hosts: localhost
@@ -21,8 +23,8 @@
     - name: required packages are present
       yum:
         name:
-          - ????
-          - ????
+          - atomic-openshift-clients 
+          - openshift-ansible
         state: present
 
 - name: Generate Inventory Hosts File
@@ -32,16 +34,19 @@
       script: /root/ocp_advanced_deployment_homework/scripts/generate_inventory.sh
 
 - name: Execute the openshift-ansible prerequisites
-  import_playbook: ???
+  import_playbook: /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 
 - name: Execute the openshift-ansible Deployer
-  import_playbook: ???
+  import_playbook: /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 
 - name: Verify OpenShift Cluster
   hosts: masters[0]
   tasks:
     - name: copy the .kube directory from master1 to your bastion
-    ????
+      fetch:
+        src: /root/.kube/config 
+        dest: /root/.kube/config 
+        flat: yes
 
 - name: Post installation configuration
   hosts: localhost
@@ -49,40 +54,41 @@
     - name: make sure you are system:dmin
       shell: oc whoami | grep system:admin
 
-- name: Create PVs for Users
-  hosts: nfs
-  tasks:
-    - name:
-      script: ????
-    - name: Restarting NFS Server...
-      shell: systemctl restart nfs-server
-
-- name: Create 25 definitions files for PVs 5G size
-  hosts: localhost
-
-- name: Create 25 definitions files for PVs 10G size
-
-- name: Create all PVs from definitions files
-
-- name: Fix NFS Persistent Volume Recycling
-
-- name: Smoke Test
-
-- name: Jenkins Setup
-  hosts: localhost
-  tasks:
-    - name: jenkins setup
-      script: ???
-
-- name: HPA configuration on production deployment of openshift-tasks
-  hosts: localhost
-  tasks:
-
-- name: Creation of users for Alpha and Beta clients
-
-- name: Assigning labels to the users according to its group
-
-- name: Setup the environment for Alpha and Beta clients
-
-
-  ....
+##- name: Create PVs for Users
+##  hosts: nfs
+##  tasks:
+##    - name:
+##      script: ????
+##    - name: Restarting NFS Server...
+##      shell: systemctl restart nfs-server
+##
+##- name: Create 25 definitions files for PVs 5G size
+##  hosts: localhost
+##
+##- name: Create 25 definitions files for PVs 10G size
+##
+##- name: Create all PVs from definitions files
+##
+##- name: Fix NFS Persistent Volume Recycling
+##
+##- name: Smoke Test
+##
+##- name: Jenkins Setup
+##  hosts: localhost
+##  tasks:
+##    - name: jenkins setup
+##      script: ???
+##
+##- name: HPA configuration on production deployment of openshift-tasks
+##  hosts: localhost
+##  tasks:
+##
+##- name: Creation of users for Alpha and Beta clients
+##
+##- name: Assigning labels to the users according to its group
+##
+##- name: Setup the environment for Alpha and Beta clients
+##
+##
+##  ....
+##
