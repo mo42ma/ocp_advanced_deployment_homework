@@ -54,20 +54,31 @@
     - name: make sure you are system:dmin
       shell: oc whoami | grep system:admin
 
-##- name: Create PVs for Users
-##  hosts: nfs
-##  tasks:
-##    - name:
-##      script: ????
-##    - name: Restarting NFS Server...
-##      shell: systemctl restart nfs-server
-##
-##- name: Create 25 definitions files for PVs 5G size
-##  hosts: localhost
-##
-##- name: Create 25 definitions files for PVs 10G size
-##
-##- name: Create all PVs from definitions files
+- name: Create PVs for Users
+  hosts: nfs
+  tasks:
+    - name: Add shares to expors file
+      script: /root/ocp_advanced_deployment_homework/scripts/create_pvs.sh
+    - name: Restarting NFS Server...
+      shell: systemctl restart nfs-server
+
+- name: Create 25 definitions files for PVs 5G size
+  hosts: localhost
+  tasks:
+    - name:  create files 5g
+      script: /root/ocp_advanced_deployment_homework/scripts/pvs_5Gsize.sh
+
+- name: Create 25 definitions files for PVs 10G size
+  hosts: localhost
+  tasks:
+    - name:  create files 10g
+      script: /root/ocp_advanced_deployment_homework/scripts/pvs_10Gsize.sh
+
+- name: Create all PVs from definitions files
+  hosts: localhost
+  tasks:
+    - name: create all of the defined PVs
+      shell: cat /root/pvs/* | oc create -f -
 ##
 ##- name: Fix NFS Persistent Volume Recycling
 ##
