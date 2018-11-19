@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export GUID=`hostname|awk -F. '{print $2}'`
 
 export volsize="5Gi"
@@ -24,3 +25,4 @@ cat << EOF > /root/pvs/${volume}
 }
 EOF
 echo "Created def file for ${volume}";
+done

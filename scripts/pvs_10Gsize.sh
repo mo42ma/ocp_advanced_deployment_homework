@@ -26,3 +26,4 @@ cat << EOF > /root/pvs/${volume}
 }
 EOF
 echo "Created def file for ${volume}";
+done

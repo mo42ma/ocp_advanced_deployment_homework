@@ -67,18 +67,21 @@
   tasks:
     - name:  create files 5g
       script: /root/ocp_advanced_deployment_homework/scripts/pvs_5Gsize.sh
+      tags: pvs
 
 - name: Create 25 definitions files for PVs 10G size
   hosts: localhost
   tasks:
     - name:  create files 10g
       script: /root/ocp_advanced_deployment_homework/scripts/pvs_10Gsize.sh
+      tags: pvs
 
 - name: Create all PVs from definitions files
   hosts: localhost
   tasks:
     - name: create all of the defined PVs
       shell: cat /root/pvs/* | oc create -f -
+      tags: pvs
 ##
 ##- name: Fix NFS Persistent Volume Recycling
 
