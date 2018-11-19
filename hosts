@@ -40,8 +40,8 @@ openshift_enable_unsupported_configurations=True
 ### OpenShift Network Vars
 ###########################################################################
 
-#osm_cluster_network_cidr=10.1.0.0/16
-#openshift_portal_net=172.30.0.0/16
+osm_cluster_network_cidr=10.1.0.0/16
+openshift_portal_net=172.30.0.0/16
 
 os_sdn_network_plugin_name='redhat/openshift-ovs-networkpolicy'
 
