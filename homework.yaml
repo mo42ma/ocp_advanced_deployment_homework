@@ -81,9 +81,22 @@
       shell: cat /root/pvs/* | oc create -f -
 ##
 ##- name: Fix NFS Persistent Volume Recycling
-##
-##- name: Smoke Test
-##
+
+- name: Smoke Test
+  tasks:
+    - name: create project smoke-test
+      shell: oc new-project smoke-test
+    - name: Create the Node.js application
+      shell: oc new-app nodejs-mongo-persistent
+    - name: Examine the project status
+      shell: oc status
+    - name: Verify that the storage was set up correctly
+      shell: oc get pvc
+    - name: retrieve the route
+      shell: oc get route
+    - name: Delete your smoke-test project
+      shell: oc delete project smoke-test
+
 ##- name: Jenkins Setup
 ##  hosts: localhost
 ##  tasks:
