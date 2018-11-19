@@ -80,7 +80,7 @@
   hosts: localhost
   tasks:
     - name: create all of the defined PVs
-      shell: cat /root/pvs/* | oc create -f -
+      shell: "cat /root/pvs/* | oc create -f -"
       tags: pvs
 ##
 ##- name: Fix NFS Persistent Volume Recycling
