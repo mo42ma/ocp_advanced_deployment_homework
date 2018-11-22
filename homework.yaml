@@ -91,16 +91,6 @@
       shell: "cat /root/pvs/* | oc apply -f -"
       tags: pvs
 
-- name: Jenkins
-  hosts: localhost
-  tags: jenkins
-  tasks:
-    - name: create jenkins project
-      shell: oc new-project cicd-dev
-    - name: create jenkins master
-      shell: oc new-app jenkins-persistent
-    - name: create jenkins pipeline
-      shell: oc create -f jenkins_template.yaml
       
 ##
 ##- name: Fix NFS Persistent Volume Recycling
@@ -121,11 +111,12 @@
 ##    - name: Delete your smoke-test project
 ##      shell: oc delete project smoke-test
 ##
-##- name: Jenkins Setup
-##  hosts: localhost
-##  tasks:
-##    - name: jenkins setup
-##      script: ???
+- name: Jenkins Setup
+  hosts: localhost
+  tasks:
+    - name: jenkins setup
+      script: /root/ocp_advanced_deployment_homework/scripts/create_jenkins.sh
+      tags: jenkins
 ##
 ##- name: HPA configuration on production deployment of openshift-tasks
 ##  hosts: localhost
