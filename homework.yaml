@@ -42,11 +42,9 @@
         state: present
 
 - name: Execute the openshift-ansible prerequisites
-  hosts: localhost
   import_playbook: /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 
 - name: Execute the openshift-ansible Deployer
-  hosts: localhost
   import_playbook: /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
 
 - name: Verify OpenShift Cluster
@@ -92,10 +90,23 @@
     - name: create all of the defined PVs
       shell: "cat /root/pvs/* | oc apply -f -"
       tags: pvs
+
+- name: Jenkins
+  hosts: localhost
+  tags: jenkins
+  tasks:
+    - name: create jenkins project
+      shell: oc new-project cicd-dev
+    - name: create jenkins master
+      shell: oc new-app jenkins-persistent
+    - name: create jenkins pipeline
+      shell: oc create -f jenkins_template.yaml
+      
 ##
 ##- name: Fix NFS Persistent Volume Recycling
 ##
 ##- name: Smoke Test
+##  hosts: localhost
 ##  tasks:
 ##    - name: create project smoke-test
 ##      shell: oc new-project smoke-test
