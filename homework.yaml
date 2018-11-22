@@ -10,7 +10,7 @@
   connection: local
   gather_facts: False
   tasks:
-    - name: Refresh in-memory EC2 cache
+    - name: Refresh in-memory cache
       meta: refresh_inventory
 
 - name: Prepare GUID environment variable across all hosts
@@ -62,34 +62,34 @@
     - name: make sure you are system:dmin
       shell: oc whoami | grep system:admin
 
-- name: Create PVs for Users
-  hosts: nfs
-  tasks:
-    - name: Add shares to expors file
-      script: /root/ocp_advanced_deployment_homework/scripts/create_pvs.sh
-    - name: Restarting NFS Server...
-      shell: systemctl restart nfs-server
-
-- name: Create 25 definitions files for PVs 5G size
-  hosts: localhost
-  tasks:
-    - name:  create files 5g
-      script: /root/ocp_advanced_deployment_homework/scripts/pvs_5Gsize.sh
-      tags: pvs
-
-- name: Create 25 definitions files for PVs 10G size
-  hosts: localhost
-  tasks:
-    - name:  create files 10g
-      script: /root/ocp_advanced_deployment_homework/scripts/pvs_10Gsize.sh
-      tags: pvs
-
-- name: Create all PVs from definitions files
-  hosts: localhost
-  tasks:
-    - name: create all of the defined PVs
-      shell: "cat /root/pvs/* | oc create -f -"
-      tags: pvs
+##- name: Create PVs for Users
+##  hosts: nfs
+##  tasks:
+##    - name: Add shares to exports file
+##      script: /root/ocp_advanced_deployment_homework/scripts/create_pvs.sh
+##    - name: Restarting NFS Server...
+##      shell: systemctl restart nfs-server
+##
+##- name: Create 25 definitions files for PVs 5G size
+##  hosts: localhost
+##  tasks:
+##    - name:  create files 5g
+##      script: /root/ocp_advanced_deployment_homework/scripts/pvs_5Gsize.sh
+##      tags: pvs
+##
+##- name: Create 25 definitions files for PVs 10G size
+##  hosts: localhost
+##  tasks:
+##    - name:  create files 10g {{ var }}
+##      script: /root/ocp_advanced_deployment_homework/scripts/pvs_10Gsize.sh
+##      tags: pvs 
+##
+##- name: Create all PVs from definitions files
+##  hosts: localhost
+##  tasks:
+##    - name: create all of the defined PVs
+##      shell: "cat /root/pvs/* | oc apply -f -"
+##      tags: pvs
 ##
 ##- name: Fix NFS Persistent Volume Recycling
 
