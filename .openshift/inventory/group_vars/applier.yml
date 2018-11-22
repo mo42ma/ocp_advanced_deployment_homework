@@ -1,0 +1,13 @@
+openshift_cluster_content:
+- object: Cluster Policy
+  content:
+  - name: Apply cluster policy resources
+    file: "/../policy/"
+- object: Configure Projects
+  content:
+  - name: Create Projects
+    template: "/../templates/project-template.yml"
+    params: "/../params/projects/"
+  - name: Add common infrastructure
+    template: "/../templates/common-infra.yml"
+    params: "/../params/common-infra/"
