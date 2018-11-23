@@ -12,7 +12,7 @@
   tasks:
     - name: Refresh in-memory cache
       meta: refresh_inventory
-
+## localhost update ansible
 - name: Prepare GUID environment variable across all hosts
   hosts: all
   tasks:
@@ -39,6 +39,7 @@
         name:
           - atomic-openshift-clients 
           - openshift-ansible
+          - python2-pip
         state: present
 
 - name: Execute the openshift-ansible prerequisites
@@ -111,6 +112,7 @@
 ##    - name: Delete your smoke-test project
 ##      shell: oc delete project smoke-test
 ##
+###### Task app git repo https://github.com/redhat-gpte-devopsautomation/openshift-tasks.git
 - name: Jenkins Setup
   hosts: localhost
   tasks:

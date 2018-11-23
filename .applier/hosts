@@ -1,2 +1,2 @@
-[applier]
+[seed-hosts]
 localhost ansible_connection=local

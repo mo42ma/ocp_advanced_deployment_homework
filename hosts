@@ -6,6 +6,8 @@
 timeout=60
 ansible_become=yes
 ansible_ssh_user=ec2-user
+# Python Interpreter
+# ansible_python_interpreter=/usr/bin/python
 
 ###########################################################################
 ### OpenShift Basic Vars

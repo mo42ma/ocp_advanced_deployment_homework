@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: List
+items:
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: cicd-dev
+    creationTimestam: null
+  displayName: Project for jenkins
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-build
+    creationTimestam: null
+  displayName: Project for building
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-dev
+    creationTimestam: null
+  displayName: project for dev
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-test
+    creationTimestam: null
+  displayName: project for test
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: tasks-prod
+    creationTimestam: null
+  displayName: project for prod
